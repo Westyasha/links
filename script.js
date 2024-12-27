@@ -49,10 +49,11 @@ function updateResult() {
         highlightClass = 'positive';
     }
 
-    resultDiv.innerHTML = `<span class="result-text">Количество ссылок: </span><span class="highlight ${highlightClass}"><span class="count">${uniqueLinksCount}</span></span>`;
-
     if (duplicatesToggle.checked) {
-        resultDiv.innerHTML += ` | <span class="highlight duplicate"><span class="count">${duplicateLinksCount}</span></span>`;
+        resultDiv.innerHTML = `<span class="result-text">Количество ссылок: </span><span class="highlight ${highlightClass}"><span class="count">${uniqueLinksCount}</span></span><br>`;
+        resultDiv.innerHTML += `<span class="result-text">Повторные ссылки: </span><span class="highlight duplicate"><span class="count">${duplicateLinksCount}</span></span>`;
+    } else {
+        resultDiv.innerHTML = `<span class="result-text">Количество ссылок: </span><span class="highlight ${highlightClass}"><span class="count">${linksCount}</span></span>`;
     }
 }
 
