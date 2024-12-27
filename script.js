@@ -11,14 +11,25 @@ function updateResult() {
 
     let uniqueLinksCount = linksCount;
     let duplicateLinksCount = 0;
+    let duplicatesContent = '';
 
     if (duplicatesToggle.checked) {
-        const duplicates = findDuplicates(links);
-        duplicateLinksCount = duplicates.length;
+        const { duplicates, duplicatesCount: totalDuplicates } = findDuplicates(links);
+        duplicateLinksCount = totalDuplicates;
         uniqueLinksCount = linksCount - duplicateLinksCount;
 
         if (duplicates.length > 0) {
-            duplicatesDiv.innerHTML = 'Повторные ссылки:<br>' + duplicates.join('<br>');
+            duplicatesContent = 'Повторные ссылки:<br>';
+            let counter = 1;
+            for (const group of duplicates) {
+                duplicatesContent += `${getEmojiNumber(counter)}<br>`;
+                for (const link of group) {
+                    duplicatesContent += `${link}<br>`;
+                }
+                duplicatesContent += `<br>`;
+                counter++;
+            }
+            duplicatesDiv.innerHTML = duplicatesContent;
             duplicatesDiv.classList.add('show');
         } else {
             duplicatesDiv.innerHTML = '';
@@ -46,16 +57,39 @@ function updateResult() {
 }
 
 function findDuplicates(arr) {
-    const seen = new Set();
-    const duplicates = new Set();
+    const seen = new Map();
+    const duplicates = [];
+    let duplicatesCount = 0;
     for (const item of arr) {
         if (seen.has(item)) {
-            duplicates.add(item);
+            seen.get(item).push(item);
         } else {
-            seen.add(item);
+            seen.set(item, [item]);
         }
     }
-    return Array.from(duplicates);
+
+    for(const [link, linksArr] of seen){
+        if(linksArr.length > 1){
+            duplicates.push(linksArr);
+            duplicatesCount += linksArr.length;
+        }
+    }
+
+    return { duplicates, duplicatesCount };
+}
+
+function getEmojiNumber(number) {
+    const emojiNumbers = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣'];
+    if (number < 10) {
+        return emojiNumbers[number];
+    } else {
+        let emojiString = '';
+        const numberString = number.toString();
+        for (const digit of numberString) {
+            emojiString += emojiNumbers[parseInt(digit)];
+        }
+        return emojiString;
+    }
 }
 
 linksTextarea.addEventListener('input', updateResult);
