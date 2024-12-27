@@ -25,11 +25,21 @@
     <div class="wrapper">
         <div class="container" style="opacity: 0;">
             <h1>Счетчик ссылок</h1>
+            <div class="toggle-container">
+                <label for="duplicates-toggle">Повторные ссылки:</label>
+                <label class="switch">
+                    <input type="checkbox" id="duplicates-toggle">
+                    <span class="slider">
+                        <span class="thumb"></span>
+                    </span>
+                </label>
+            </div>
             <div class="form-group">
                 <label for="links">Вставьте текст:</label>
                 <textarea id="links"></textarea>
             </div>
             <div id="result" class="result"></div>
+            <div id="duplicates" class="duplicates"></div>
         </div>
     </div>
 

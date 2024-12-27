@@ -97,7 +97,8 @@ h1 {
     display: inline-flex;
     align-items: center;
     gap: 2px;
-     animation: fadeInOut 5s infinite;/* Только для цифры */
+    animation: fadeInOut 5s infinite;
+    /* Только для цифры */
 }
 
 .highlight span {
@@ -117,8 +118,14 @@ h1 {
 
 .highlight.positive .count {
     color: #32CD32;
-    text-shadow: 0 0 10px #32CD32, 0 0 20px #228B22
-    ;
+    text-shadow: 0 0 10px #32CD32, 0 0 20px #228B22;
+}
+
+.highlight.duplicate .count {
+    color: #00FFFF;
+    /* Цвет для количества дубликатов */
+    text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    /* Тень для количества дубликатов */
 }
 
 .result-text {
@@ -126,10 +133,12 @@ h1 {
 }
 
 @keyframes fadeInOut {
-    0%, 100% {
+    0%,
+        100% {
         opacity: 0.2;
         text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
     }
+
     50% {
         opacity: 1;
         text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
@@ -141,6 +150,7 @@ h1 {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -151,4 +161,112 @@ h1 {
     #background-video {
         display: none;
     }
+}
+
+/* Стили для свитчера */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.toggle-container label {
+    color: #ddd;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    /* Немного отступаем вправо от текста */
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    /* Ширина свитчера */
+    height: 20px;
+    /* Высота свитчера */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 20px;
+    /* Скругление углов для слайдера */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    /* Высота ползунка */
+    width: 16px;
+    /* Ширина ползунка */
+    left: 2px;
+    /* Позиция ползунка слева */
+    bottom: 2px;
+    /* Позиция ползунка снизу */
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+    /* Круглый ползунок */
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(20px);
+    /* Перемещение ползунка при включении */
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+}
+
+.thumb {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Стили для блока с повторными ссылками */
+.duplicates {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    color: #FFFFFF;
+    text-align: left;
+    font-size: 0.9rem;
+    display: none;
+    /* По умолчанию блок скрыт */
+    max-height: 200px;
+    /* Ограничиваем максимальную высоту */
+    overflow-y: auto;
+    /* Добавляем вертикальную прокрутку */
+}
+
+.duplicates.show {
+    display: block;
+    /* Показываем блок, когда есть повторные ссылки */
 }
