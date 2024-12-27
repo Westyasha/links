@@ -9,14 +9,12 @@ function updateResult() {
     const links = text.match(/https:\/\/\S+/g) || [];
     const linksCount = links.length;
 
-    let uniqueLinksCount = linksCount;
     let duplicateLinksCount = 0;
     let duplicatesContent = '';
 
     if (duplicatesToggle.checked) {
         const { duplicates, duplicatesCount: totalDuplicates } = findDuplicates(links);
         duplicateLinksCount = totalDuplicates;
-        uniqueLinksCount = linksCount - duplicateLinksCount;
 
         if (duplicates.length > 0) {
             duplicatesContent = 'Повторные ссылки:<br>';
@@ -41,16 +39,16 @@ function updateResult() {
     }
 
     let highlightClass = '';
-    if (uniqueLinksCount < 20) {
+    if (linksCount < 20) {
         highlightClass = 'negative';
-    } else if (uniqueLinksCount >= 20 && uniqueLinksCount < 30) {
+    } else if (linksCount >= 20 && linksCount < 30) {
         highlightClass = 'low';
     } else {
         highlightClass = 'positive';
     }
 
     if (duplicatesToggle.checked) {
-        resultDiv.innerHTML = `<span class="result-text">Количество ссылок: </span><span class="highlight ${highlightClass}"><span class="count">${uniqueLinksCount}</span></span><br>`;
+        resultDiv.innerHTML = `<span class="result-text">Количество ссылок: </span><span class="highlight ${highlightClass}"><span class="count">${linksCount}</span></span><br>`;
         resultDiv.innerHTML += `<span class="result-text">Повторные ссылки: </span><span class="highlight duplicate"><span class="count">${duplicateLinksCount}</span></span>`;
     } else {
         resultDiv.innerHTML = `<span class="result-text">Количество ссылок: </span><span class="highlight ${highlightClass}"><span class="count">${linksCount}</span></span>`;
