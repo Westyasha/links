@@ -5,7 +5,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif; /* Возвращаем шрифт Arial */
+    font-weight: normal; /* Убираем ExtraLight начертание */
     overflow: hidden;
     background: url('resources/background.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -46,13 +47,6 @@ body {
                 0 0 25px rgba(255, 255, 255, 0.6),
                 0 0 40px rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-h1 {
-    color: #FFFFFF;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    text-align: center;
 }
 
 .form-group {
@@ -269,4 +263,68 @@ input:checked+.slider:before {
 .duplicates.show {
     display: block;
     /* Показываем блок, когда есть повторные ссылки */
+}
+
+/* Эффект глитч */
+.glitch-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600; /* SemiBold для заголовка */
+}
+
+.stack span {
+  font-weight: bold;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  --stack-height: calc(100% / var(--stacks) - 1px);
+  --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+  --clip-top: calc(var(--stack-height) * var(--index));
+  --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+  clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+  animation: stack 340ms cubic-bezier(.46,.29,0,1.24) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+}
+
+.stack span:nth-child(odd) { --glitch-translate: 8px; }
+.stack span:nth-child(even) { --glitch-translate: -8px; }
+
+@keyframes stack {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+  };
+  60% {
+    opacity: 0.5;
+    transform: translateX(50%);
+  }
+  80% {
+    transform: none;
+    opacity: 1;
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    transform: translate(var(--glitch-translate));
+  }
+  2% {
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  4%, 100% {  text-shadow: none; transform: none; }
 }

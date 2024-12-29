@@ -15,6 +15,9 @@
     <title>Счетчик ссылок</title>
     <link rel="icon" href="resources/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
     <video id="background-video" autoplay loop muted playsinline>
@@ -24,7 +27,13 @@
 
     <div class="wrapper">
         <div class="container" style="opacity: 0;">
-            <h1>Счетчик ссылок</h1>
+            <div class="glitch-container">
+                <div class="stack" style="--stacks: 3;">
+                  <span style="--index: 0;">Счетчик ссылок</span>
+                  <span style="--index: 1;">Счетчик ссылок</span>
+                  <span style="--index: 2;">Счетчик ссылок</span>
+                </div>
+              </div>
             <div class="toggle-container">
                 <label for="duplicates-toggle">Проверка на повторные ссылки:</label>
                 <label class="switch">
