@@ -250,14 +250,12 @@ input:checked+.slider:before {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     color: #FFFFFF;
-    text-align: left;
+    text-align: center;
     font-size: 0.9rem;
     display: none;
-    /* По умолчанию блок скрыт */
     max-height: 200px;
-    /* Ограничиваем максимальную высоту */
     overflow-y: auto;
-    /* Добавляем вертикальную прокрутку */
+    word-wrap: break-word; /* Добавляем перенос слов */
 }
 
 .duplicates.show {
@@ -332,13 +330,11 @@ input:checked+.slider:before {
 
 /* Стили для текста "Повторные ссылки" */
 .duplicates-title {
-    text-align: center;
+    text-align: center; /* Center the title */
     font-family: 'Unbounded', sans-serif;
     font-weight: 600;
     font-size: 1.2rem;
-    margin-bottom: 10px; /* Добавляем отступ снизу */
-  
-    /* Градиент */
+    margin-bottom: 10px; 
     background: linear-gradient(
       to right in oklch,
       var(--color-1),
@@ -348,8 +344,6 @@ input:checked+.slider:before {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-  
-    /* Анимация градиента */
     animation: gradient-change 2s linear infinite alternate;
 }
   

@@ -17,14 +17,16 @@ function updateResult() {
         duplicateLinksCount = totalDuplicates;
 
         if (duplicates.length > 0) {
-            duplicatesContent = '<div class="duplicates-title">Повторные ссылки:</div>'; // Добавляем заголовок
+            duplicatesContent = '<div class="duplicates-title">Повторные ссылки:</div>';
             let counter = 1;
             for (const group of duplicates) {
-                duplicatesContent += `<div style="margin-top: 10px;">${getEmojiNumber(counter)}</div>`; // Добавляем отступ сверху
-                for (const link of group) {
-                    duplicatesContent += `${link}<br>`;
-                }
-                counter++;
+              duplicatesContent += `<div style="margin-top: 10px; text-align: center;">${getEmojiNumber(counter)}</div>`; // Center-align emoji number
+              duplicatesContent += `<div style="text-align: center;">`; // Create a div to center the links
+              for (const link of group) {
+                duplicatesContent += `${link}<br>`;
+              }
+              duplicatesContent += `</div>`; // Close the centering div
+              counter++;
             }
             duplicatesDiv.innerHTML = duplicatesContent;
             duplicatesDiv.classList.add('show');
