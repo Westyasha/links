@@ -17,14 +17,13 @@ function updateResult() {
         duplicateLinksCount = totalDuplicates;
 
         if (duplicates.length > 0) {
-            duplicatesContent = 'Повторные ссылки:<br>';
+            duplicatesContent = '<div class="duplicates-title">Повторные ссылки:</div>'; // Добавляем заголовок
             let counter = 1;
             for (const group of duplicates) {
-                duplicatesContent += `${getEmojiNumber(counter)}<br>`;
+                duplicatesContent += `<div style="margin-top: 10px;">${getEmojiNumber(counter)}</div>`; // Добавляем отступ сверху
                 for (const link of group) {
                     duplicatesContent += `${link}<br>`;
                 }
-                duplicatesContent += `<br>`;
                 counter++;
             }
             duplicatesDiv.innerHTML = duplicatesContent;
@@ -67,8 +66,8 @@ function findDuplicates(arr) {
         }
     }
 
-    for(const [link, linksArr] of seen){
-        if(linksArr.length > 1){
+    for (const [link, linksArr] of seen) {
+        if (linksArr.length > 1) {
             duplicates.push(linksArr);
             duplicatesCount += linksArr.length;
         }
